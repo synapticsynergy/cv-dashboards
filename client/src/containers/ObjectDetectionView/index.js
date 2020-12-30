@@ -13,6 +13,12 @@ const styles = {
     alignItems: 'center',
     flexDirection: 'column',
   },
+  videoContainer: {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)"
+  },
   formView: {
     display: 'flex',
     flexDirection: 'column',
@@ -36,14 +42,6 @@ class ObjectDetectionView extends React.Component {
   // reference to both the video and canvas
   videoRef = React.createRef();
   canvasRef = React.createRef();
-
-  // we are gonna use inline style. TODO: change alignment
-  styles = {
-    position: 'fixed',
-    top: 150,
-    left: 150,
-  };
-
 
   detectFromVideoFrame = (model, video) => {
     model.detect(video).then(predictions => {
@@ -72,7 +70,7 @@ class ObjectDetectionView extends React.Component {
       const height = prediction.bbox[3];
       // Draw the bounding box.
       ctx.strokeStyle = "#2fff00";
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 4;
       ctx.strokeRect(x, y, width, height);
       // Draw the label background.
       ctx.fillStyle = "#2fff00";
@@ -131,17 +129,22 @@ class ObjectDetectionView extends React.Component {
   // here we are returning the video frame and canvas to draw,
   // so we are in someway drawing our video "on the go"
   render() {
+    const width = "600"
+    const height = "500"
     return (
-      <div style={styles.ODContainer}>
+      <div style={{
+        margin: "0 auto"
+      }} width="100%">
         <video
-          style={this.styles}
+          style={styles.videoContainer}
           autoPlay
+          playsInline
           muted
           ref={this.videoRef}
-          width="720"
-          height="600"
+          width={width}
+          height={height}
         />
-        <canvas style={this.styles} ref={this.canvasRef} width="720" height="650" />
+        <canvas style={styles.videoContainer} ref={this.canvasRef} width={width} height={height} />
       </div>
     );
   }
