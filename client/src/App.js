@@ -4,8 +4,9 @@ import {
   Typography,
 } from '@material-ui/core';
 import './App.css';
-import FormView from './containers/FormView';
+// import FormView from './containers/FormView';
 import ObjectDetectionView from './containers/ObjectDetectionView';
+import Simple from './containers/Annotation';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class App extends React.Component {
       listView: false,
     };
     this.toggleListView = this.toggleListView.bind(this);
-    this.backToFormView = this.backToFormView.bind(this);
+    // this.backToFormView = this.backToFormView.bind(this);
   }
 
   toggleListView() {
@@ -43,6 +44,7 @@ class App extends React.Component {
         </AppBar>
         <ObjectDetectionView/>
         {/* <FormView toggleListView={this.toggleListView} {...this.state} /> */}
+        {/* <Simple/> */}
       </div>
     );
   }
